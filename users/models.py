@@ -53,7 +53,7 @@ class User(AbstractUser):
     class Meta:
         verbose_name = "пользователь"
         verbose_name_plural = "пользователи"
-        ordering = ("name",)
+        ordering = ("email",)
 
     def __str__(self):
         return self.email
