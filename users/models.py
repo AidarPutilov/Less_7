@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+
 class User(AbstractUser):
     username = None
     email = models.EmailField(
@@ -22,7 +23,13 @@ class User(AbstractUser):
         blank=True,
         null=True,
     )
-    
+    avatar = models.ImageField(
+        upload_to="avatars/",
+        verbose_name="аватар",
+        null=True,
+        blank=True,
+        help_text="Загрузите аватар",
+    )
     # name = models.CharField(
     #     max_length=20,
     #     verbose_name="имя",
@@ -49,4 +56,4 @@ class User(AbstractUser):
         ordering = ("name",)
 
     def __str__(self):
-        return self.name
+        return self.email
