@@ -57,7 +57,7 @@ class Lesson(models.Model):
         verbose_name="Курс",
     )
     video_url = models.TextField(
-        verbose_name='ссылка на видео',
+        verbose_name="ссылка на видео",
         help_text="Прикрепите ссылку на видео",
         blank=True,
         null=True,
