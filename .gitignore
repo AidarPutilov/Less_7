@@ -4,6 +4,7 @@ temp.*
 *.ini
 .vscode
 .flake8
+.pylintrc
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
