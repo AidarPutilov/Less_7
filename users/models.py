@@ -1,6 +1,8 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+from materials.models import Course, Lesson
+
 
 class User(AbstractUser):
     username = None
@@ -30,22 +32,6 @@ class User(AbstractUser):
         blank=True,
         help_text="Загрузите аватар",
     )
-    # name = models.CharField(
-    #     max_length=20,
-    #     verbose_name="имя",
-    #     help_text="Введите имя",
-    #     blank=True,
-    #     null=True,
-    # )
-    # token = models.CharField(
-    #     max_length=100,
-    #     verbose_name="токен",
-    #     blank=True, null=True
-    # )
-    # is_active = models.BooleanField(
-    #     default=True,
-    #     verbose_name="активен",
-    # )
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -57,3 +43,52 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.email
+
+
+class Payment(models.Model):
+    CASH = "cash"
+    CASHLESS = "cashless"
+    PAYMENT_METHOD = [
+        (CASH, "cash"),
+        (CASHLESS, "cashless")
+    ]
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name="плательщик"
+    )
+    date = models.DateField(
+        verbose_name='дата платежа',
+        null=True,
+        blank=True,
+    )
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+        verbose_name="курс",
+        null=True,
+        blank=True,
+    )
+    lesson = models.ForeignKey(
+        Lesson,
+        on_delete=models.CASCADE,
+        verbose_name="урок",
+        null=True,
+        blank=True,
+    )
+    cost = models.PositiveIntegerField(
+        default=0,
+        verbose_name="стоимость"
+    )
+    method = models.CharField(
+        choices=PAYMENT_METHOD,
+        default=CASH,
+        verbose_name='способ оплаты'
+    )
+
+    class Meta:
+        verbose_name = "оплата"
+        verbose_name_plural = "оплаты"
+
+    def __str__(self):
+        return f"{self.user}: {self.cost}"
