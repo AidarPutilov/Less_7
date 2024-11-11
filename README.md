@@ -63,6 +63,7 @@ python3 manage.py filldb
 python3 manage.py runserver
 ```
 ### Запросы
+```
 http://127.0.0.1:8000/course/ - Список курсов, запрос CREATE
 http://127.0.0.1:8000/course/<pk> - Запросы RETRIEVE, PUT, DELETE
 http://127.0.0.1:8000/course/lesson/ - Список уроков
@@ -74,3 +75,4 @@ http://127.0.0.1:8000/users/payment?course=8 - Фильтрация по кур�
 http://127.0.0.1:8000/users/payment?lesson=14 - Фильтрация по уроку
 http://127.0.0.1:8000/users/payment?method=cashless - Фильтрация по способу оплаты
 http://127.0.0.1:8000/users/payment?ordering=date - Сортировка по дате (-date - в обратном порядке)
+```
