@@ -1,3 +1,4 @@
+from datetime import timedelta
 from pathlib import Path
 
 import os
@@ -126,15 +127,15 @@ LOGOUT_REDIRECT_URL = "/"
 LOGIN_URL = "users:login"
 
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
     # Настройки JWT-токенов
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
 }
 
-# Настройки срока действия токенов
-# SIMPLE_JWT = {
-#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=15),
-#     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-# }
+# Сроки действия JWT-токенов
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+}

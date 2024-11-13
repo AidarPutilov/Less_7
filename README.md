@@ -1,7 +1,9 @@
 ## Домашняя работа 25.1
-- Добавлено поле вывода количества уроков в сериализатор для модели курса.
+- Добавлен CRUD для модели User.
+- Добавлена команда createusers.
+-
+-
 - Добавлена модель Платежи.
-- Добавлена команда filldb.
 - Для сериализатора для модели курса реализовано поле вывода уроков.
 - Добавлена возможность сортировки по дате.
 - Добавлена возможность фильтрации по курсу, уроку и способу оплаты.
@@ -12,6 +14,7 @@
 ### Применённые пакеты
 - django
 - djangorestframework
+- djangorestframework-simplejwt
 - django-filter
 - pillow
 - psycopg2-binary
@@ -58,6 +61,11 @@ python3 manage.py migrate
 python3 manage.py filldb
 ```
 
+#### Добавление пользователей
+```
+python3 manage.py createusers
+```
+
 #### Запуск проекта
 ```
 python3 manage.py runserver
@@ -70,7 +78,13 @@ http://127.0.0.1:8000/course/lesson/create/ - Создание урока
 http://127.0.0.1:8000/course/lesson/<pk>/update/ - Редактирование урока
 http://127.0.0.1:8000/course/lesson/<pk>/delete/ - Удаление урока
 http://127.0.0.1:8000/users/payment/ - Список платежей
-http://127.0.0.1:8000/users/payment?course=8 - Фильтрация по курсу
-http://127.0.0.1:8000/users/payment?lesson=14 - Фильтрация по уроку
+http://127.0.0.1:8000/users/payment?course=<pk> - Фильтрация по курсу
+http://127.0.0.1:8000/users/payment?lesson=<pk> - Фильтрация по уроку
 http://127.0.0.1:8000/users/payment?method=cashless - Фильтрация по способу оплаты
 http://127.0.0.1:8000/users/payment?ordering=date - Сортировка по дате (-date - в обратном порядке)
+http://127.0.0.1:8000/users/register/ - Регистрация пользователя
+http://127.0.0.1:8000/users/login/ - Получение токена
+http://127.0.0.1:8000/users/view/ - Список пользователей
+http://127.0.0.1:8000/users/view/<pk>/ - Просмотр пользователя
+http://127.0.0.1:8000/users/update/<pk>/ - Редактирование пользователя
+http://127.0.0.1:8000/users/delete/<pk>/ - Удаление пользователя

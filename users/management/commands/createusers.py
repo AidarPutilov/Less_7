@@ -1,15 +1,16 @@
-from django.contrib.auth.models import Group, Permission
 from django.core.management import BaseCommand
 
 from users.models import User
 
 
 class Command(BaseCommand):
+    '''Создание пользователей'''
     def handle(self, *args, **kwargs):
 
         # Список пользователей ('эл.адрес', 'название', 'пароль')
         users_list = [
             ("admin@sky.pro", "123"),
+            ("mod@sky.pro", "123"),
             ("user@sky.pro", "123"),
         ]
 
@@ -28,7 +29,7 @@ class Command(BaseCommand):
             # user.is_active = True
 
             # Особые параметры для администратора
-            if user_item[1] == "Admin":
+            if user_item[0] == "admin@sky.pro":
                 user.is_staff = True
                 user.is_superuser = True
             user.save()

@@ -48,17 +48,10 @@ class User(AbstractUser):
 class Payment(models.Model):
     CASH = "cash"
     CASHLESS = "cashless"
-    PAYMENT_METHOD = [
-        (CASH, "cash"),
-        (CASHLESS, "cashless")
-    ]
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE,
-        verbose_name="плательщик"
-    )
+    PAYMENT_METHOD = [(CASH, "cash"), (CASHLESS, "cashless")]
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="плательщик")
     date = models.DateField(
-        verbose_name='дата платежа',
+        verbose_name="дата платежа",
         null=True,
         blank=True,
     )
@@ -76,14 +69,9 @@ class Payment(models.Model):
         null=True,
         blank=True,
     )
-    cost = models.PositiveIntegerField(
-        default=0,
-        verbose_name="стоимость"
-    )
+    cost = models.PositiveIntegerField(default=0, verbose_name="стоимость")
     method = models.CharField(
-        choices=PAYMENT_METHOD,
-        default=CASH,
-        verbose_name='способ оплаты'
+        choices=PAYMENT_METHOD, default=CASH, verbose_name="способ оплаты"
     )
 
     class Meta:

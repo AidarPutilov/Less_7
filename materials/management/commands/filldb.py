@@ -7,64 +7,42 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
 
         course1 = Course.objects.create(
-            name="Начальная школа",
-            description="Начальная школа"
+            name="Начальная школа", description="Начальная школа"
         )
         course2 = Course.objects.create(
-            name="Средняя школа",
-            description="Средняя школа"
+            name="Средняя школа", description="Средняя школа"
         )
 
         lesson1 = Lesson.objects.create(
-            name="Арифметика",
-            description="Математика",
-            kurs=course1
+            name="Арифметика", description="Математика", kurs=course1
         )
         lesson2 = Lesson.objects.create(
-            name="Правописание",
-            description="Русский язык",
-            kurs=course1
+            name="Правописание", description="Русский язык", kurs=course1
         )
         lesson3 = Lesson.objects.create(
-            name="Граматика",
-            description="Русский язык",
-            kurs=course1
+            name="Граматика", description="Русский язык", kurs=course1
         )
         lesson4 = Lesson.objects.create(
-            name="Алгебра",
-            description="Математика",
-            kurs=course2
+            name="Алгебра", description="Математика", kurs=course2
         )
         lesson5 = Lesson.objects.create(
-            name="Геометрия",
-            description="Математика",
-            kurs=course2
+            name="Геометрия", description="Математика", kurs=course2
         )
         lesson6 = Lesson.objects.create(
-            name="Теормеханика",
-            description="Физика",
-            kurs=course2
+            name="Теормеханика", description="Физика", kurs=course2
         )
         lesson7 = Lesson.objects.create(
-            name="Неорг. химия",
-            description="Химия",
-            kurs=course2
+            name="Неорг. химия", description="Химия", kurs=course2
         )
 
         user1 = User.objects.create(
-            email="red@redmail.org",
-            phone="89996677888",
-            city="Москва"
+            email="red@redmail.org", phone="89996677888", city="Москва"
         )
         user2 = User.objects.create(
-            email="yellow@yellowmail.org",
-            phone="89992233556",
-            city="Омск"
+            email="yellow@yellowmail.org", phone="89992233556", city="Омск"
         )
         user3 = User.objects.create(
-            email="green@greenmail.org",
-            phone="89995522777",
-            city="Тверь"
+            email="green@greenmail.org", phone="89995522777", city="Тверь"
         )
 
         Payment.objects.create(
