@@ -10,7 +10,6 @@ from materials.serializers import (
 
 
 class CourseViewSet(viewsets.ModelViewSet):
-    # serializer_class = CourseSerializer
     queryset = Course.objects.all()
 
     def get_serializer_class(self):
@@ -18,10 +17,20 @@ class CourseViewSet(viewsets.ModelViewSet):
             return CourseDetailSerializer
         return CourseSerializer
 
+    def perform_create(self, serializer):
+        course = serializer.save()
+        course.owner = self.request.user
+        course.save()
+
 
 class LessonCreateAPIView(generics.CreateAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
+
+    def perform_create(self, serializer):
+        lesson = serializer.save()
+        lesson.owner = self.request.user
+        lesson.save()
 
 
 class LessonListAPIView(generics.ListAPIView):
