@@ -5,7 +5,7 @@ from users.models import User
 
 
 class Command(BaseCommand):
-    """Создание пользователей"""
+    """Создание пользователей и групп."""
 
     def handle(self, *args, **kwargs):
 
@@ -14,7 +14,6 @@ class Command(BaseCommand):
             (
                 "Moders",
                 (
-                    "admin@sky.pro",
                     "mod@sky.pro",
                 ),
             )
@@ -26,12 +25,6 @@ class Command(BaseCommand):
                 Group.objects.create(name=group_item[0])
             else:
                 Group.objects.get(name=group_item[0])
-
-            # Назначение разрешений
-            # for group_perm in group_item[2]:
-            #     # perms = Permission.objects.get(codename="can_view_users_list")
-            #     perms = Permission.objects.get(codename=group_perm)
-            #     group.permissions.add(perms)
 
         # Список пользователей ('эл.адрес', 'название', 'пароль')
         users_list = [

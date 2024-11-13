@@ -19,11 +19,13 @@ class CourseViewSet(viewsets.ModelViewSet):
             return CourseDetailSerializer
         return CourseSerializer
 
+    # Назначение владельца курса
     def perform_create(self, serializer):
         course = serializer.save()
         course.owner = self.request.user
         course.save()
 
+    # Назначение разрешений
     def get_permissions(self):
         if self.action == "create":
             self.permission_classes = (~IsModer,)
@@ -39,6 +41,7 @@ class LessonCreateAPIView(generics.CreateAPIView):
     serializer_class = LessonSerializer
     permission_classes = (~IsModer, IsAuthenticated)
 
+    # Назначение владельца урока
     def perform_create(self, serializer):
         lesson = serializer.save()
         lesson.owner = self.request.user
