@@ -3,7 +3,7 @@ from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from users.models import Payment, User
 from users.serializers import PaymentSerializer, UserSerializer
 
@@ -43,16 +43,13 @@ class UserListAPIView(generics.ListAPIView):
 class UserRetrieveAPIView(generics.RetrieveAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    # permission_classes = [IsAuthenticated, IsModerator | IsOwner]
 
 
 class UserUpdateAPIView(generics.UpdateAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    # permission_classes = [IsAuthenticated, IsModerator | IsOwner]
 
 
 class UserDeleteAPIView(generics.DestroyAPIView):
     serializer_class = UserSerializer
     queryset = User.objects.all()
-    # permission_classes = [IsAuthenticated, IsOwner]
