@@ -7,6 +7,7 @@ from materials.serializers import (
     CourseSerializer,
     LessonSerializer,
 )
+from users.permissions import IsModer
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -21,6 +22,13 @@ class CourseViewSet(viewsets.ModelViewSet):
         course = serializer.save()
         course.owner = self.request.user
         course.save()
+
+    def get_permissions(self):
+        if self.action in ["create", "destroy"]:
+            self.permission_classes = (~IsModer,)
+        elif self.action in ["update", "retrieve"]:
+            self.permission_classes = (IsModer,)
+        return super().get_permissions()
 
 
 class LessonCreateAPIView(generics.CreateAPIView):
