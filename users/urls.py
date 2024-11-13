@@ -30,6 +30,10 @@ urlpatterns = [
     path("update/<int:pk>/", UserUpdateAPIView.as_view(), name="user_change"),
     path("delete/<int:pk>/", UserDeleteAPIView.as_view(), name="user_delete"),
     # Маршруты для работы с JWT-токенами
-    path("login/", TokenObtainPairView.as_view(permission_classes=(AllowAny,)), name="login"),
+    path(
+        "login/",
+        TokenObtainPairView.as_view(permission_classes=(AllowAny,)),
+        name="login",
+    ),
     path("token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 ] + router.urls

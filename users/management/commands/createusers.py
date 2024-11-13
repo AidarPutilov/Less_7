@@ -4,7 +4,8 @@ from users.models import User
 
 
 class Command(BaseCommand):
-    '''Создание пользователей'''
+    """Создание пользователей"""
+
     def handle(self, *args, **kwargs):
 
         # Список пользователей ('эл.адрес', 'название', 'пароль')
