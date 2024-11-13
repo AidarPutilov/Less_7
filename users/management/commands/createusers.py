@@ -13,7 +13,10 @@ class Command(BaseCommand):
         groups_list = [
             (
                 "Moders",
-                ("admin@sky.pro", "mod@sky.pro",),
+                (
+                    "admin@sky.pro",
+                    "mod@sky.pro",
+                ),
             )
         ]
 
@@ -36,7 +39,6 @@ class Command(BaseCommand):
             ("mod@sky.pro", "123"),
             ("user@sky.pro", "123"),
         ]
-
 
         # Создание пользователей
         for user_item in users_list:
