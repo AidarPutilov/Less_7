@@ -71,6 +71,7 @@ python3 manage.py filldb
 python3 manage.py runserver
 ```
 ### Запросы
+```
 http://127.0.0.1:8000/course/ - Список курсов, запрос CREATE
 http://127.0.0.1:8000/course/<pk> - Запросы RETRIEVE, PUT, DELETE
 http://127.0.0.1:8000/course/lesson/ - Список уроков
@@ -88,3 +89,4 @@ http://127.0.0.1:8000/users/view/ - Список пользователей
 http://127.0.0.1:8000/users/view/<pk>/ - Просмотр пользователя
 http://127.0.0.1:8000/users/update/<pk>/ - Редактирование пользователя
 http://127.0.0.1:8000/users/delete/<pk>/ - Удаление пользователя
+```
