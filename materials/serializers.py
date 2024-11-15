@@ -1,5 +1,5 @@
-from materials.validators import ValidatorYouTubeLink, validate_youtube_link
 from rest_framework import serializers
+from materials.validators import validate_youtube_link
 
 from materials.models import Course, Lesson
 
