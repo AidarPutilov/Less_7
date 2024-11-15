@@ -1,13 +1,11 @@
+from materials.validators import ValidatorYouTubeLink, validate_youtube_link
 from rest_framework import serializers
 
 from materials.models import Course, Lesson
 
 
 class LessonSerializer(serializers.ModelSerializer):
-    # courses = serializers.SerializerMethodField()
-
-    # def get_courses(self, lesson):
-    #     return [course.name for course in Course.objects.filter(lesson=lesson)]
+    video_url = serializers.CharField(validators=[validate_youtube_link])
 
     class Meta:
         model = Lesson

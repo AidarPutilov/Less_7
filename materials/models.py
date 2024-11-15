@@ -56,16 +56,17 @@ class Lesson(models.Model):
     preview = models.ImageField(
         upload_to="preview/lesson/",
         verbose_name="превью урока",
+        help_text="Загрузите превью",
         null=True,
         blank=True,
-        help_text="Загрузите превью",
     )
     kurs = models.ForeignKey(
         Course,
         on_delete=models.CASCADE,
         verbose_name="Курс",
     )
-    video_url = models.TextField(
+    video_url = models.CharField(
+        max_length=100,
         verbose_name="ссылка на видео",
         help_text="Прикрепите ссылку на видео",
         blank=True,
