@@ -87,3 +87,31 @@ class Lesson(models.Model):
         verbose_name = "урок"
         verbose_name_plural = "уроки"
         ordering = ["name"]
+
+
+class Subscription(models.Model):
+    user = models.ForeignKey(
+        AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name='Пользователь',
+        blank=True,
+        null=True,
+    )
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+        verbose_name='Курс',
+        blank=True,
+        null=True,
+    )
+    status = models.BooleanField(
+        default=False,
+        verbose_name='Статус подписки'
+    )
+
+    class Meta:
+        verbose_name = "Подписка"
+        verbose_name_plural = "Подписки"
+
+    def __str__(self):
+        return f'{self.user}: {self.course}'
