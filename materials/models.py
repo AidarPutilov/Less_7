@@ -93,20 +93,16 @@ class Subscription(models.Model):
     user = models.ForeignKey(
         AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        verbose_name='пользователь',
+        verbose_name="пользователь",
         blank=True,
         null=True,
     )
     course = models.ForeignKey(
         Course,
         on_delete=models.CASCADE,
-        verbose_name='курс',
+        verbose_name="курс",
         blank=True,
         null=True,
-    )
-    status = models.BooleanField(
-        default=True,
-        verbose_name='статус подписки'
     )
 
     class Meta:
@@ -114,4 +110,4 @@ class Subscription(models.Model):
         verbose_name_plural = "подписки"
 
     def __str__(self):
-        return f'{self.user}: {self.course}'
+        return f"{self.user}: {self.course}"

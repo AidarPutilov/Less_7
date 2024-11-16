@@ -75,15 +75,15 @@ class LessonUpdateAPIView(generics.UpdateAPIView):
 
 
 class SubscriptionAPIView(APIView):
-    # queryset = Subscription.objects.all()
+    queryset = Subscription.objects.all()
     serializer_class = SubscriptionSerializer
     # permission_classes = (IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
-        user = self.request.user
-        course_id = self.request.data.get("course")
-        course_item = get_object_or_404(Course, pk=course_id)
-        subs_item = Subscription.objects.filter(user=user, course=course_item)
+        user = request.user
+        course_id = request.data.get("course")
+        course = get_object_or_404(Course, pk=course_id)
+        subs_item = Subscription.objects.filter(user=user, course=course)
 
         if subs_item.exists():
             # Удаление подписки
@@ -91,6 +91,6 @@ class SubscriptionAPIView(APIView):
             message = "Подписка удалена"
         else:
             # Создание подписки
-            Subscription.objects.create(user=user, course=course_item, status=True)
+            Subscription.objects.create(user=user, course=course)
             message = "Подписка добавлена"
         return Response({"message": message})

@@ -26,11 +26,15 @@ class CourseDetailSerializer(serializers.ModelSerializer):
     subscription = serializers.SerializerMethodField()
 
     def get_lesson_count(self, course):
+        """Возвращает количество уроков в курсе"""
         return Lesson.objects.filter(kurs=course).count()
 
     def get_subscription(self, course):
-        user = self.context['request'].user
-        return Subscription.objects.all().filter(user=user).filter(course=course).exists()
+        """Возвращает наличие подписки на курс"""
+        user = self.context["request"].user
+        return (
+            Subscription.objects.all().filter(user=user).filter(course=course).exists()
+        )
 
     class Meta:
         model = Course
