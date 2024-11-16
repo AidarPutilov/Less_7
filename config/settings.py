@@ -139,6 +139,6 @@ REST_FRAMEWORK = {
 
 # Сроки действия JWT-токенов
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=15),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=1500),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }

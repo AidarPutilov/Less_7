@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
@@ -73,10 +74,10 @@ class LessonUpdateAPIView(generics.UpdateAPIView):
     permission_classes = (IsModer | IsOwner, IsAuthenticated)
 
 
-class SubscriptionCreateApiView(generics.ListAPIView):
-    queryset = Subscription.objects.all()
+class SubscriptionAPIView(APIView):
+    # queryset = Subscription.objects.all()
     serializer_class = SubscriptionSerializer
-    permission_classes = [IsAuthenticated]
+    # permission_classes = (IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
         user = self.request.user
@@ -85,9 +86,11 @@ class SubscriptionCreateApiView(generics.ListAPIView):
         subs_item = Subscription.objects.filter(user=user, course=course_item)
 
         if subs_item.exists():
+            # Удаление подписки
             subs_item.delete()
-            message = "подписка удалена"
+            message = "Подписка удалена"
         else:
+            # Создание подписки
             Subscription.objects.create(user=user, course=course_item, status=True)
-            message = "подписка добавлена"
+            message = "Подписка добавлена"
         return Response({"message": message})

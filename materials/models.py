@@ -105,7 +105,7 @@ class Subscription(models.Model):
         null=True,
     )
     status = models.BooleanField(
-        default=False,
+        default=True,
         verbose_name='статус подписки'
     )
 
