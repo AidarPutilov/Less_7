@@ -16,21 +16,23 @@ from users.permissions import IsModer, IsOwner
 
 
 class CourseViewSet(viewsets.ModelViewSet):
+    serializer_class = CourseSerializer
     queryset = Course.objects.all()
 
     def get_serializer_class(self):
+        """Выбор сериализатора в зависимости от запроса"""
         if self.action == "retrieve":
             return CourseDetailSerializer
         return CourseSerializer
 
-    # Назначение владельца курса
     def perform_create(self, serializer):
+        """Назначение владельца курса"""
         course = serializer.save()
         course.owner = self.request.user
         course.save()
 
-    # Назначение разрешений
     def get_permissions(self):
+        """Назначение разрешений"""
         if self.action == "create":
             self.permission_classes = (~IsModer,)
         elif self.action == "destroy":

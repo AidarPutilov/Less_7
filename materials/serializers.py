@@ -23,7 +23,7 @@ class CourseSerializer(serializers.ModelSerializer):
 class CourseDetailSerializer(serializers.ModelSerializer):
     lesson_count = serializers.SerializerMethodField()
     lessons = LessonSerializer(many=True, read_only=True, source="lesson_set")
-    subscription = serializers.SerializerMethodField()
+    subscription = serializers.SerializerMethodField(read_only=True)
 
     def get_lesson_count(self, course):
         """Возвращает количество уроков в курсе"""
