@@ -56,16 +56,17 @@ class Lesson(models.Model):
     preview = models.ImageField(
         upload_to="preview/lesson/",
         verbose_name="превью урока",
+        help_text="Загрузите превью",
         null=True,
         blank=True,
-        help_text="Загрузите превью",
     )
     kurs = models.ForeignKey(
         Course,
         on_delete=models.CASCADE,
         verbose_name="Курс",
     )
-    video_url = models.TextField(
+    video_url = models.CharField(
+        max_length=100,
         verbose_name="ссылка на видео",
         help_text="Прикрепите ссылку на видео",
         blank=True,
@@ -86,3 +87,27 @@ class Lesson(models.Model):
         verbose_name = "урок"
         verbose_name_plural = "уроки"
         ordering = ["name"]
+
+
+class Subscription(models.Model):
+    user = models.ForeignKey(
+        AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        verbose_name="пользователь",
+        blank=True,
+        null=True,
+    )
+    course = models.ForeignKey(
+        Course,
+        on_delete=models.CASCADE,
+        verbose_name="курс",
+        blank=True,
+        null=True,
+    )
+
+    class Meta:
+        verbose_name = "подписка"
+        verbose_name_plural = "подписки"
+
+    def __str__(self):
+        return f"{self.user}: {self.course}"
