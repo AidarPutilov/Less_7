@@ -44,4 +44,4 @@ class CourseDetailSerializer(serializers.ModelSerializer):
 class SubscriptionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subscription
-        fields = ("status",)
+        fields = "__all__"
