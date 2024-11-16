@@ -1,12 +1,15 @@
+from django.shortcuts import get_object_or_404
+from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
-from materials.models import Course, Lesson
+from materials.models import Course, Lesson, Subscription
 from materials.serializers import (
     CourseDetailSerializer,
     CourseSerializer,
     LessonSerializer,
+    SubscriptionSerializer,
 )
 from users.permissions import IsModer, IsOwner
 
@@ -68,3 +71,23 @@ class LessonUpdateAPIView(generics.UpdateAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
     permission_classes = (IsModer | IsOwner, IsAuthenticated)
+
+
+class SubscriptionCreateApiView(generics.ListAPIView):
+    queryset = Subscription.objects.all()
+    serializer_class = SubscriptionSerializer
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        user = self.request.user
+        course_id = self.request.data.get("course")
+        course_item = get_object_or_404(Course, pk=course_id)
+        subs_item = Subscription.objects.filter(user=user, course=course_item)
+
+        if subs_item.exists():
+            subs_item.delete()
+            message = "подписка удалена"
+        else:
+            Subscription.objects.create(user=user, course=course_item, status=True)
+            message = "подписка добавлена"
+        return Response({"message": message})
