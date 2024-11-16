@@ -6,6 +6,7 @@ from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated
 
 from materials.models import Course, Lesson, Subscription
+from materials.paginations import CustomPagination
 from materials.serializers import (
     CourseDetailSerializer,
     CourseSerializer,
@@ -18,6 +19,7 @@ from users.permissions import IsModer, IsOwner
 class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     queryset = Course.objects.all()
+    pagination_class = CustomPagination
 
     def get_serializer_class(self):
         """Выбор сериализатора в зависимости от запроса"""
@@ -47,8 +49,8 @@ class LessonCreateAPIView(generics.CreateAPIView):
     serializer_class = LessonSerializer
     permission_classes = (~IsModer, IsAuthenticated)
 
-    # Назначение владельца урока
     def perform_create(self, serializer):
+        """Назначение владельца курса"""
         lesson = serializer.save()
         lesson.owner = self.request.user
         lesson.save()
@@ -57,6 +59,7 @@ class LessonCreateAPIView(generics.CreateAPIView):
 class LessonListAPIView(generics.ListAPIView):
     queryset = Lesson.objects.all()
     serializer_class = LessonSerializer
+    pagination_class = CustomPagination
 
 
 class LessonRetrieveAPIView(generics.RetrieveAPIView):
@@ -79,7 +82,7 @@ class LessonUpdateAPIView(generics.UpdateAPIView):
 class SubscriptionAPIView(APIView):
     queryset = Subscription.objects.all()
     serializer_class = SubscriptionSerializer
-    # permission_classes = (IsAuthenticated,)
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
         user = request.user
