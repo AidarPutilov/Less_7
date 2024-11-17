@@ -73,10 +73,29 @@ class Payment(models.Model):
     method = models.CharField(
         choices=PAYMENT_METHOD, default=CASH, verbose_name="способ оплаты"
     )
+    session_id = models.CharField(
+        max_length=255,
+        verbose_name="ID сессии",
+        null=True,
+        blank=True,
+    )
+    link = models.URLField(
+        max_length=400,
+        verbose_name="ссылка на оплату",
+        null=True,
+        blank=True,
+    )
+    status = models.CharField(
+        max_length=50,
+        verbose_name="статус платежа",
+        null=True,
+        blank=True,
+    )
 
     class Meta:
-        verbose_name = "оплата"
-        verbose_name_plural = "оплаты"
+        verbose_name = "платёж"
+        verbose_name_plural = "платежи"
+        ordering = ["-date"]
 
     def __str__(self):
         return f"{self.user}: {self.cost}"
