@@ -1,4 +1,6 @@
 ## Домашняя работа 26.1
+-
+
 - Добавлен валидатор проверки URL-видео модели Lesson.
 - Добавлена модель Subscription и функционал работы подписки.
 - В запросе RETRIEVE для Course добавлено поле subscription.
@@ -21,12 +23,14 @@
 - psycopg2-binary
 - python-dotenv
 - coverage
+- drf-yasg
 - black
 
 ### Пользователи, создаваемые командой createusers:
 - admin@sky.pro - Администратор
 - mod@sky.pro - Модератор
 - user@sky.pro - Владелец всех записей БД
+
 Пароль: 123
 
 ### Инструкция для развертывания проекта
