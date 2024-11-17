@@ -49,7 +49,13 @@ class Payment(models.Model):
     CASH = "cash"
     CASHLESS = "cashless"
     PAYMENT_METHOD = [(CASH, "cash"), (CASHLESS, "cashless")]
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="плательщик")
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        verbose_name="плательщик",
+        null=True,
+        blank=True,
+    )
     date = models.DateField(
         verbose_name="дата платежа",
         null=True,

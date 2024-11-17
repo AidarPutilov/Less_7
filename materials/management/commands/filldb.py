@@ -5,6 +5,7 @@ from users.models import User, Payment
 
 class Command(BaseCommand):
     """Заполнение Базы данных."""
+
     def handle(self, *args, **kwargs):
 
         # Владелец данных
@@ -19,13 +20,13 @@ class Command(BaseCommand):
         )
 
         # Уроки
-        lesson1 = Lesson.objects.create(
+        Lesson.objects.create(
             name="Арифметика", description="Математика", kurs=course1, owner=user
         )
-        lesson2 = Lesson.objects.create(
+        Lesson.objects.create(
             name="Правописание", description="Русский язык", kurs=course1, owner=user
         )
-        lesson3 = Lesson.objects.create(
+        Lesson.objects.create(
             name="Граматика", description="Русский язык", kurs=course1, owner=user
         )
         lesson4 = Lesson.objects.create(

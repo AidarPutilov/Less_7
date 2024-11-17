@@ -5,7 +5,9 @@ from materials.models import Course, Lesson, Subscription
 
 
 class LessonSerializer(serializers.ModelSerializer):
-    video_url = serializers.CharField(read_only=True, validators=[validate_youtube_link])
+    video_url = serializers.CharField(
+        read_only=True, validators=[validate_youtube_link]
+    )
 
     class Meta:
         model = Lesson
