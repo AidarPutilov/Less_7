@@ -13,9 +13,7 @@ class Command(BaseCommand):
         groups_list = [
             (
                 "Moders",
-                (
-                    "mod@sky.pro",
-                ),
+                ("mod@sky.pro",),
             )
         ]
 

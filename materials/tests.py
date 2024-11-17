@@ -162,33 +162,21 @@ class SubscriptionTestCase(APITestCase):
 
     def test_subscription_create(self):
         """Тестирование Subscription ON"""
-        url = reverse('materials:subscription')
-        data = {
-            'user': self.user,
-            'course': self.course.pk
-        }
+        url = reverse("materials:subscription")
+        data = {"user": self.user, "course": self.course.pk}
         response = self.client.post(url, data)
         data = response.json()
-        self.assertEqual(
-            response.status_code, status.HTTP_200_OK
-        )
-        self.assertEqual(
-            data, {'message': 'Подписка добавлена'}
-        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(data, {"message": "Подписка добавлена"})
 
     def test_subscription_delete(self):
         """Тестирование Subscription OFF"""
-        self.subscription = Subscription.objects.create(user=self.user, course=self.course)
-        url = reverse('materials:subscription')
-        data = {
-            'user': self.user,
-            'course': self.course.pk
-        }
+        self.subscription = Subscription.objects.create(
+            user=self.user, course=self.course
+        )
+        url = reverse("materials:subscription")
+        data = {"user": self.user, "course": self.course.pk}
         response = self.client.post(url, data)
         data = response.json()
-        self.assertEqual(
-            response.status_code, status.HTTP_200_OK
-        )
-        self.assertEqual(
-            data, {'message': 'Подписка удалена'}
-        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(data, {"message": "Подписка удалена"})
