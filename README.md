@@ -20,6 +20,8 @@
 - coverage
 - drf-yasg
 - stripe
+- celery
+- redis
 - black
 
 ### Пользователи, создаваемые командой createusers:
