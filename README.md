@@ -99,6 +99,7 @@ http://127.0.0.1:8000/course/lesson/<pk>/update/ - Редактирование 
 http://127.0.0.1:8000/course/lesson/<pk>/delete/ - Удаление урока
 http://127.0.0.1:8000/users/payment/list/ - Список платежей
 http://127.0.0.1:8000/users/payment/create/ - Создание платежа
+POST: {"cost": 1000, "method": "cashless", "course": 1}
 http://127.0.0.1:8000/users/payment/list?course=<pk> - Фильтрация по курсу
 http://127.0.0.1:8000/users/payment/list?lesson=<pk> - Фильтрация по уроку
 http://127.0.0.1:8000/users/payment/list?method=cashless - Фильтрация по способу оплаты
