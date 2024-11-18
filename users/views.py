@@ -1,4 +1,3 @@
-# from rest_framework import viewsets
 from datetime import datetime
 from rest_framework.permissions import AllowAny
 from rest_framework import generics
@@ -7,8 +6,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 from users.models import Payment, User
 from users.serializers import PaymentSerializer, UserSerializer
 from users.services import (
-    convert_rub_to_usd,
     create_stripe_price,
+    create_stripe_product,
     create_stripe_sessions,
 )
 
@@ -36,8 +35,9 @@ class PaymentCreateAPIView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         payment = serializer.save(user=self.request.user)
-        price = create_stripe_price(payment.cost)
-        session_id, payment_link = create_stripe_sessions(price)
+        product_id = create_stripe_product(payment)
+        price_id = create_stripe_price(payment.cost, product_id)
+        session_id, payment_link = create_stripe_sessions(price_id)
         payment.session_id = session_id
         payment.link = payment_link
         payment.date = datetime.now().date()
