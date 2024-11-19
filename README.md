@@ -21,6 +21,7 @@
 - drf-yasg
 - stripe
 - celery
+- django-celery-beat
 - redis
 - black
 
