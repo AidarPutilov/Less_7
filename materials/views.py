@@ -13,6 +13,7 @@ from materials.serializers import (
     LessonSerializer,
     SubscriptionSerializer,
 )
+from materials.task import send_info
 from users.permissions import IsModer, IsOwner
 
 
@@ -98,4 +99,8 @@ class SubscriptionAPIView(APIView):
             # Создание подписки
             Subscription.objects.create(user=user, course=course)
             message = "Подписка добавлена"
+            send_info.delay(course.owner.email)
         return Response({"message": message})
+# Need fix
+# https://my.sky.pro/student-cabinet/stream-lesson/119727/homework-requirements
+# 8:32
