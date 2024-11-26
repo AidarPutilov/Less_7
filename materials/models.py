@@ -104,9 +104,9 @@ class Subscription(models.Model):
         blank=True,
         null=True,
     )
-# Need fix
-# https://my.sky.pro/student-cabinet/stream-lesson/119727/homework-requirements
-# 8:32
+    # Need fix
+    # https://my.sky.pro/student-cabinet/stream-lesson/119727/homework-requirements
+    # 8:32
 
     class Meta:
         verbose_name = "подписка"

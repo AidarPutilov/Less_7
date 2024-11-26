@@ -109,6 +109,8 @@ class SubscriptionAPIView(APIView):
             Subscription.objects.create(user=user, course=course)
             message = "Подписка добавлена"
         return Response({"message": message})
+
+
 # Need fix
 # https://my.sky.pro/student-cabinet/stream-lesson/119727/homework-requirements
 # 8:32
