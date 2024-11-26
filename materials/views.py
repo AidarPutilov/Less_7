@@ -23,19 +23,28 @@ class CourseViewSet(viewsets.ModelViewSet):
     pagination_class = CustomPagination
 
     def get_serializer_class(self):
-        """Выбор сериализатора в зависимости от запроса"""
+        """Выбор сериализатора в зависимости от запроса."""
         if self.action == "retrieve":
             return CourseDetailSerializer
         return CourseSerializer
 
     def perform_create(self, serializer):
-        """Назначение владельца курса"""
+        """Назначение владельца курса."""
         course = serializer.save()
         course.owner = self.request.user
         course.save()
 
+    def perform_update(self, serializer):
+        """Оправка писем при обновлении курса."""
+        # print("1")
+        course = serializer.save()
+        # print("2")
+        course_pk = self.get_object().pk
+        send_info.delay(course_pk)
+        course.save()
+
     def get_permissions(self):
-        """Назначение разрешений"""
+        """Назначение разрешений."""
         if self.action == "create":
             self.permission_classes = (~IsModer,)
         elif self.action == "destroy":
@@ -99,7 +108,6 @@ class SubscriptionAPIView(APIView):
             # Создание подписки
             Subscription.objects.create(user=user, course=course)
             message = "Подписка добавлена"
-            send_info.delay(course.owner.email)
         return Response({"message": message})
 # Need fix
 # https://my.sky.pro/student-cabinet/stream-lesson/119727/homework-requirements
